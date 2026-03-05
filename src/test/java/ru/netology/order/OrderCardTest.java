@@ -35,6 +35,21 @@ public class OrderCardTest extends BaseTest {
     }
 
     @Test
+    void shouldShowErrorIfOnlySurnameEntered() {
+        OrderPage page = new OrderPage(driver);
+
+        page.setName("Иванов");
+        page.setPhone("+79991234567");
+        page.acceptAgreement();
+        page.submit();
+
+        Assertions.assertEquals(
+                "Введите фамилию и имя через пробел",
+                page.getNameErrorText()
+        );
+    }
+
+    @Test
     void shouldShowErrorIfPhoneInvalid() {
         OrderPage page = new OrderPage(driver);
 
